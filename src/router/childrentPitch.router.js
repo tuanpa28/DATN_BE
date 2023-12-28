@@ -1,6 +1,6 @@
 import express from "express";
-import { childrentPitchController } from "../controllers";
-import { authMiddleware } from "../middlewares";
+import { childrentPitchController } from "../controllers/index.js";
+import { authMiddleware } from "../middlewares/index.js";
 const routerChildrentPitch = express.Router();
 
 // Get All

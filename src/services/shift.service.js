@@ -1,4 +1,4 @@
-import shiftModel from "../models/shift.model";
+import shiftModel from "../models/shift.model.js";
 
 export const getAll = async () => {
   return shiftModel.find();

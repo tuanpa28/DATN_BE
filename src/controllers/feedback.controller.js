@@ -1,10 +1,10 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import Pitch from "../models/pitch.model";
-import { feedbackValidation } from "../validations";
-import { feedbackService } from "../services";
-import Feedback from "../models/feedback.model";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import Pitch from "../models/pitch.model.js";
+import { feedbackValidation } from "../validations/index.js";
+import { feedbackService } from "../services/index.js";
+import Feedback from "../models/feedback.model.js";
 import moment from "moment";
 
 // Get All Feedback
@@ -39,12 +39,18 @@ export const getAllFeedback = async (req, res) => {
       ...feedbacks,
       data: feedbacks.data.map((feedback) => ({
         ...feedback.toObject(),
-        createdAt: moment(feedback.createdAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-        updatedAt: moment(feedback.updatedAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
+        createdAt: moment(feedback.createdAt)
+          .utcOffset(7)
+          .format("DD/MM/YYYY - HH:mm"),
+        updatedAt: moment(feedback.updatedAt)
+          .utcOffset(7)
+          .format("DD/MM/YYYY - HH:mm"),
       })),
     };
 
-    res.status(200).json(successfully(feedbackWithVietnamTime, "Lấy dữ liệu thành công"));
+    res
+      .status(200)
+      .json(successfully(feedbackWithVietnamTime, "Lấy dữ liệu thành công"));
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }
@@ -88,11 +94,17 @@ export const createFeedback = async (req, res) => {
 
     const feedbackWithVietnamTime = {
       ...feedback.toObject(),
-      createdAt: moment(feedback.createdAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-      updatedAt: moment(feedback.updatedAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
+      createdAt: moment(feedback.createdAt)
+        .utcOffset(7)
+        .format("DD/MM/YYYY - HH:mm"),
+      updatedAt: moment(feedback.updatedAt)
+        .utcOffset(7)
+        .format("DD/MM/YYYY - HH:mm"),
       user: req.user,
     };
-    res.status(200).json(successfully(feedbackWithVietnamTime, "Đánh giá thành công"));
+    res
+      .status(200)
+      .json(successfully(feedbackWithVietnamTime, "Đánh giá thành công"));
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }
@@ -105,16 +117,20 @@ export const totalStarByUser = async (req, res) => {
 
     const feedbacks = await Feedback.find({ id_pitch });
 
-
     let totalQuantityStar = 0;
     feedbacks.forEach((feedback) => {
       totalQuantityStar += feedback.quantity_star;
     });
 
     const numberOfFeedbacks = feedbacks.length;
-    const averageRating = numberOfFeedbacks > 0 ? totalQuantityStar / numberOfFeedbacks : 0;
+    const averageRating =
+      numberOfFeedbacks > 0 ? totalQuantityStar / numberOfFeedbacks : 0;
 
-    res.status(200).json(successfully({ averageRating }, "Tính tổng số lượng sao thành công"));
+    res
+      .status(200)
+      .json(
+        successfully({ averageRating }, "Tính tổng số lượng sao thành công")
+      );
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }

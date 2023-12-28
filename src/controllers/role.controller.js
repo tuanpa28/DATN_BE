@@ -1,8 +1,8 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import { roleService } from "../services";
-import { roleValidation } from "../validations";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import { roleService } from "../services/index.js";
+import { roleValidation } from "../validations/index.js";
 
 export const getAll = async (req, res) => {
   try {

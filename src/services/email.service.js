@@ -1,4 +1,4 @@
-import Email from "../models/email.model";
+import Email from "../models/email.model.js";
 
 export const getAll = async () => {
   return Email.find();

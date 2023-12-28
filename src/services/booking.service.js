@@ -1,5 +1,5 @@
 import mongoose, { ObjectId } from "mongoose";
-import BookingModel from "../models/booking.model";
+import BookingModel from "../models/booking.model.js";
 
 const pipeLine = [
     {

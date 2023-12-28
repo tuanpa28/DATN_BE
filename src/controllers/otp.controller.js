@@ -1,8 +1,8 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import { otpService } from "../services";
-import { otpValidation } from "../validations";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import { otpService } from "../services/index.js";
+import { otpValidation } from "../validations/index.js";
 
 export const getAll = async (req, res) => {
   try {

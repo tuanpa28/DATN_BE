@@ -1,14 +1,13 @@
-export * as permissionService from "./permission.service";
-export * as roleService from "./role.service";
-export * as userService from "./user.service";
-export * as otpService from "./otp.service";
-export * as postService from "./post.service";
-export * as commentService from "./comment.service";
-export * as childrenPitchService from "./chirldrenPitch.service";
-export * as shiftService from "./shift.service";
-export * as locationService from "./location.service";
-export * as pitchService from "./pitch.service";
-export * as feedbackService from "./feedback.service";
-export * as emailService from "./email.service";
-export * as serviceService  from "./service.service";
-
+export * as permissionService from "./permission.service.js";
+export * as roleService from "./role.service.js";
+export * as userService from "./user.service.js";
+export * as otpService from "./otp.service.js";
+export * as postService from "./post.service.js";
+export * as commentService from "./comment.service.js";
+export * as childrenPitchService from "./chirldrenPitch.service.js";
+export * as shiftService from "./shift.service.js";
+export * as locationService from "./location.service.js";
+export * as pitchService from "./pitch.service.js";
+export * as feedbackService from "./feedback.service.js";
+export * as emailService from "./email.service.js";
+export * as serviceService from "./service.service.js";

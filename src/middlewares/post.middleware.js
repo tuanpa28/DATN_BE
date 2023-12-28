@@ -1,4 +1,4 @@
-import Comment from "../models/comment.model";
+import Comment from "../models/comment.model.js";
 
 export const deleteComments = async function (next) {
   try {

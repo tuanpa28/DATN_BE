@@ -1,4 +1,4 @@
-import ChildrenPitch from "../models/chirldrenPitch.model";
+import ChildrenPitch from "../models/chirldrenPitch.model.js";
 
 export const getAll = async () => {
   return ChildrenPitch.find();

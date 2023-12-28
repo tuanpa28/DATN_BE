@@ -1,11 +1,11 @@
-import Post from "../models/post.model";
+import Post from "../models/post.model.js";
 
 export const getAllPost = (options) => {
   return Post.paginate(
     {},
     {
       ...options,
-      populate: ["comment_id",],
+      populate: ["comment_id"],
     }
   );
 };

@@ -1,9 +1,13 @@
 import { addDays, format, parse, subDays } from "date-fns";
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import { childrenPitchService, pitchService, shiftService } from "../services";
-import { chilrenPitchValdation } from "../validations";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import {
+  childrenPitchService,
+  pitchService,
+  shiftService,
+} from "../services/index.js";
+import { chilrenPitchValdation } from "../validations/index.js";
 
 export const getAll = async (req, res) => {
   try {

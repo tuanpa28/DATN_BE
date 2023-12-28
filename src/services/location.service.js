@@ -1,4 +1,4 @@
-import Location from "../models/location.model";
+import Location from "../models/location.model.js";
 
 export const getAllLocation = () => {
   return Location.find();

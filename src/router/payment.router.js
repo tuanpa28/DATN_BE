@@ -1,6 +1,6 @@
 import express from "express";
-import * as PaymentController from "../controllers/payment.controller";
-import * as PaymentValidation from "../validations/payment.validation";
+import * as PaymentController from "../controllers/payment.controller.js";
+import * as PaymentValidation from "../validations/payment.validation.js";
 
 const router = express.Router();
 

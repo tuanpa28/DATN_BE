@@ -1,4 +1,4 @@
-import User from "../models/user.model";
+import User from "../models/user.model.js";
 
 export const getList = async (options) => {
   const { skip, limit, sort, ...params } = options;

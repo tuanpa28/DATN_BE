@@ -1,4 +1,4 @@
-import Permission from "../models/permission.model";
+import Permission from "../models/permission.model.js";
 
 export const getAll = async () => {
   return Permission.find();

@@ -1,6 +1,6 @@
 import express from "express";
-import { shiftController } from "../controllers";
-import { authMiddleware } from "../middlewares";
+import { shiftController } from "../controllers/index.js";
+import { authMiddleware } from "../middlewares/index.js";
 
 const routerShift = express.Router();
 

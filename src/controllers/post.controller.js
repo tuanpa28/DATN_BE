@@ -1,10 +1,9 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { successfully } from "../formatResponse/successfully";
-import { serverError } from "../formatResponse/serverError";
-import { postValidation } from "../validations";
-import { commentService, postService } from "../services";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { successfully } from "../formatResponse/successfully.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { postValidation } from "../validations/index.js";
+import { commentService, postService } from "../services/index.js";
 import moment from "moment";
-
 
 // Get All Post
 export const getAllPost = async (req, res) => {
@@ -38,17 +37,22 @@ export const getAllPost = async (req, res) => {
       ...posts,
       data: posts.data.map((post) => ({
         ...post.toObject(),
-        createdAt: moment(post.createdAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-        updatedAt: moment(post.updatedAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
+        createdAt: moment(post.createdAt)
+          .utcOffset(7)
+          .format("DD/MM/YYYY - HH:mm"),
+        updatedAt: moment(post.updatedAt)
+          .utcOffset(7)
+          .format("DD/MM/YYYY - HH:mm"),
       })),
     };
 
-    res.status(200).json(successfully(postsWithVietnamTime, "Lấy dữ liệu thành công"));
+    res
+      .status(200)
+      .json(successfully(postsWithVietnamTime, "Lấy dữ liệu thành công"));
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }
 };
-
 
 //Get One Post
 export const getPost = async (req, res) => {
@@ -61,15 +65,20 @@ export const getPost = async (req, res) => {
     }
     const postOneWithVietnamTime = {
       ...post.toObject(),
-      createdAt: moment(post.createdAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-      updatedAt: moment(post.updatedAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-    }
-    res.status(200).json(successfully(postOneWithVietnamTime, "Lấy dữ liệu thành công"));
+      createdAt: moment(post.createdAt)
+        .utcOffset(7)
+        .format("DD/MM/YYYY - HH:mm"),
+      updatedAt: moment(post.updatedAt)
+        .utcOffset(7)
+        .format("DD/MM/YYYY - HH:mm"),
+    };
+    res
+      .status(200)
+      .json(successfully(postOneWithVietnamTime, "Lấy dữ liệu thành công"));
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }
 };
-
 
 // Get One Post and Comment
 export const getCommentPost = async (req, res) => {
@@ -78,7 +87,7 @@ export const getCommentPost = async (req, res) => {
     const post = await postService.getPost(idPost);
 
     if (!post) {
-      return res.status(404).json(badRequest(404, 'Không có dữ liệu!'));
+      return res.status(404).json(badRequest(404, "Không có dữ liệu!"));
     }
 
     // Lấy dữ liệu của từng comment_id
@@ -90,8 +99,12 @@ export const getCommentPost = async (req, res) => {
           id_user: comment.id_user,
           content: comment.content,
           id_post: comment.id_post,
-          createdAt: moment(comment.createdAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-          updatedAt: moment(comment.updatedAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
+          createdAt: moment(comment.createdAt)
+            .utcOffset(7)
+            .format("DD/MM/YYYY - HH:mm"),
+          updatedAt: moment(comment.updatedAt)
+            .utcOffset(7)
+            .format("DD/MM/YYYY - HH:mm"),
         };
         return commentWithVietnamTime;
       })
@@ -108,12 +121,11 @@ export const getCommentPost = async (req, res) => {
       updatedAt: post.updatedAt,
     };
 
-    res.status(200).json(successfully(formattedPost, 'Lấy dữ liệu thành công'));
+    res.status(200).json(successfully(formattedPost, "Lấy dữ liệu thành công"));
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }
 };
-
 
 // Get Post By User
 export const getPostByUser = async (req, res) => {

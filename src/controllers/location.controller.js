@@ -1,8 +1,8 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import { locationService, pitchService } from "../services";
-import { locationValidation } from "../validations";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import { locationService, pitchService } from "../services/index.js";
+import { locationValidation } from "../validations/index.js";
 import fs from "fs";
 const locationJson = JSON.parse(fs.readFileSync("locations.json"));
 

@@ -1,23 +1,23 @@
-import express from 'express';
-import { postController } from '../controllers';
-import { authMiddleware } from '../middlewares';
+import express from "express";
+import { postController } from "../controllers/index.js";
+import { authMiddleware } from "../middlewares/index.js";
 
 const routerPost = express.Router();
 
 // Get All Post
-routerPost.get('/', postController.getAllPost);
+routerPost.get("/", postController.getAllPost);
 
 // Get One Post
-routerPost.get('/:idPost', postController.getPost);
+routerPost.get("/:idPost", postController.getPost);
 // Get One Post and comment
-routerPost.get('/comment/:idPost', postController.getCommentPost);
+routerPost.get("/comment/:idPost", postController.getCommentPost);
 
 // Get Post By User
-routerPost.get('/user', postController.getPostByUser);
+routerPost.get("/user", postController.getPostByUser);
 
 // Create Post
 routerPost.post(
-  '/',
+  "/",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   postController.createPost
@@ -25,7 +25,7 @@ routerPost.post(
 
 // Update Post
 routerPost.put(
-  '/:idPost',
+  "/:idPost",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   postController.updatePost
@@ -33,7 +33,7 @@ routerPost.put(
 
 // Delete Post
 routerPost.delete(
-  '/:idPost',
+  "/:idPost",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   postController.deletePost

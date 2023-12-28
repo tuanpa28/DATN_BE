@@ -1,4 +1,4 @@
-import Role from "../models/role.model";
+import Role from "../models/role.model.js";
 
 export const getAll = async () => {
   return Role.find().populate("permissions");

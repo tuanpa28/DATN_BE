@@ -1,18 +1,18 @@
-import express from 'express';
-import { bannerController } from '../controllers';
-import { authMiddleware } from '../middlewares';
+import express from "express";
+import { bannerController } from "../controllers/index.js";
+import { authMiddleware } from "../middlewares/index.js";
 
 const routerBanner = express.Router();
 
 // GET ALL
-routerBanner.get('/', bannerController.getAll);
+routerBanner.get("/", bannerController.getAll);
 
 // GET ONE
-routerBanner.get('/:id', bannerController.getOne);
+routerBanner.get("/:id", bannerController.getOne);
 
 // CREATE
 routerBanner.post(
-  '/',
+  "/",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   bannerController.create
@@ -20,7 +20,7 @@ routerBanner.post(
 
 // UPDATE
 routerBanner.patch(
-  '/:id',
+  "/:id",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   bannerController.update
@@ -28,7 +28,7 @@ routerBanner.patch(
 
 // REMOVE
 routerBanner.delete(
-  '/:id',
+  "/:id",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   bannerController.remove

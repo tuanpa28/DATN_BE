@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import Role from "./role.model";
+import Role from "./role.model.js";
 
 const permissionSchema = new Schema(
   {

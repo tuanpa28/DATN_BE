@@ -1,10 +1,10 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import Pitch from "../models/pitch.model";
-import Post from "../models/post.model";
-import { commentValidation } from "../validations";
-import { commentService } from "../services";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import Pitch from "../models/pitch.model.js";
+import Post from "../models/post.model.js";
+import { commentValidation } from "../validations/index.js";
+import { commentService } from "../services/index.js";
 import moment from "moment";
 
 // Get All Comment
@@ -41,12 +41,18 @@ export const getAllComment = async (req, res) => {
       ...comments,
       data: comments.data.map((comment) => ({
         ...comment.toObject(),
-        createdAt: moment(comment.createdAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-        updatedAt: moment(comment.updatedAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
+        createdAt: moment(comment.createdAt)
+          .utcOffset(7)
+          .format("DD/MM/YYYY - HH:mm"),
+        updatedAt: moment(comment.updatedAt)
+          .utcOffset(7)
+          .format("DD/MM/YYYY - HH:mm"),
       })),
     };
 
-    res.status(200).json(successfully(commentsWithVietnamTime, "Lấy dữ liệu thành công"));
+    res
+      .status(200)
+      .json(successfully(commentsWithVietnamTime, "Lấy dữ liệu thành công"));
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }
@@ -122,11 +128,17 @@ export const createComment = async (req, res) => {
     // Chuyển đổi createdAt và updatedAt thành giờ Việt Nam theo định dạng mong muốn
     const commentWithVietnamTime = {
       ...comment.toObject(),
-      createdAt: moment(comment.createdAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
-      updatedAt: moment(comment.updatedAt).utcOffset(7).format('DD/MM/YYYY - HH:mm'),
+      createdAt: moment(comment.createdAt)
+        .utcOffset(7)
+        .format("DD/MM/YYYY - HH:mm"),
+      updatedAt: moment(comment.updatedAt)
+        .utcOffset(7)
+        .format("DD/MM/YYYY - HH:mm"),
       user: req.user,
     };
-    res.status(200).json(successfully(commentWithVietnamTime, "Bình luận thành công"));
+    res
+      .status(200)
+      .json(successfully(commentWithVietnamTime, "Bình luận thành công"));
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }

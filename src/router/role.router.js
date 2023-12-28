@@ -1,18 +1,18 @@
-import express from 'express';
-import { roleController } from '../controllers';
-import { authMiddleware } from '../middlewares';
+import express from "express";
+import { roleController } from "../controllers/index.js";
+import { authMiddleware } from "../middlewares/index.js";
 
 const routerRole = express.Router();
 
 // GET ALL
-routerRole.get('/', roleController.getAll);
+routerRole.get("/", roleController.getAll);
 
 // GET BY ID
-routerRole.get('/:id', roleController.getById);
+routerRole.get("/:id", roleController.getById);
 
 // CREATE
 routerRole.post(
-  '/',
+  "/",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   roleController.create
@@ -20,7 +20,7 @@ routerRole.post(
 
 // UPDATE
 routerRole.put(
-  '/:id',
+  "/:id",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   roleController.update
@@ -28,7 +28,7 @@ routerRole.put(
 
 // DELETE
 routerRole.delete(
-  '/:id',
+  "/:id",
   authMiddleware.verifyToken,
   authMiddleware.verifyAdmin,
   roleController.remove

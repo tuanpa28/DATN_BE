@@ -1,18 +1,16 @@
-import {
-  addDays,
-  differenceInMinutes,
-  format,
-  parse,
-  subDays,
-} from "date-fns";
+import { addDays, differenceInMinutes, format, parse, subDays } from "date-fns";
 import "dotenv/config";
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import { childrenPitchService, pitchService, shiftService } from "../services";
-import { transporter } from "../utils/sendEmail";
-import { shiftValidation } from "../validations";
-import * as BookingService from "../services/booking.service";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import {
+  childrenPitchService,
+  pitchService,
+  shiftService,
+} from "../services/index.js";
+import { transporter } from "../utils/sendEmail.js";
+import { shiftValidation } from "../validations/index.js";
+import * as BookingService from "../services/booking.service.js";
 import fs from "fs";
 const locationJson = JSON.parse(fs.readFileSync("locations.json"));
 

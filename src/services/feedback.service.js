@@ -1,4 +1,4 @@
-import Feedback from "../models/feedback.model";
+import Feedback from "../models/feedback.model.js";
 
 export const getAllFeedback = (options) => {
   return Feedback.paginate(

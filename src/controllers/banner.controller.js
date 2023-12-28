@@ -1,8 +1,8 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import * as bannerService  from "../services/banner.service";
-import { bannerValidation } from "../validations";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import * as bannerService from "../services/banner.service.js";
+import { bannerValidation } from "../validations/index.js";
 export const getAll = async (req, res) => {
   try {
     const banner = await bannerService.getAll();
@@ -10,18 +10,18 @@ export const getAll = async (req, res) => {
   } catch (error) {
     res.status(500).json(serverError(error.message));
   }
-}
-  export const getOne = async (req, res) => {
-    try {
-      const banner = await bannerService.getById(req.params.id);
-      res.json({
-        meassge: "Lây dữ liệu thành công",
-        data: banner,
+};
+export const getOne = async (req, res) => {
+  try {
+    const banner = await bannerService.getById(req.params.id);
+    res.json({
+      meassge: "Lây dữ liệu thành công",
+      data: banner,
     });
-    } catch (error) {
-      res.status(500).json(serverError(error.message));
-    }
-  };
+  } catch (error) {
+    res.status(500).json(serverError(error.message));
+  }
+};
 
 export const create = async (req, res) => {
   try {
@@ -45,7 +45,10 @@ export const update = async (req, res) => {
     if (error) {
       return res.status(400).json(badRequest(400, error.details[0].message));
     }
-    const banner = await bannerService.update({...req.body,id: req.params.id});
+    const banner = await bannerService.update({
+      ...req.body,
+      id: req.params.id,
+    });
     if (!banner) {
       return res
         .status(400)
@@ -58,15 +61,13 @@ export const update = async (req, res) => {
 };
 
 export const remove = async (req, res) => {
-    try {
-        const banner = await bannerService.remove(req.params.id);
-        if (!banner) {
-        return res
-            .status(400)
-            .json(badRequest(400, "Xóa không thành công !!!"));
-        }
-        res.status(200).json(successfully(banner, "Xóa thành công !!!"));
-    } catch  (error) {
-        res.status(500).json(serverError(error.message));
+  try {
+    const banner = await bannerService.remove(req.params.id);
+    if (!banner) {
+      return res.status(400).json(badRequest(400, "Xóa không thành công !!!"));
     }
-}
+    res.status(200).json(successfully(banner, "Xóa thành công !!!"));
+  } catch (error) {
+    res.status(500).json(serverError(error.message));
+  }
+};

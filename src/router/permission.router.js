@@ -1,40 +1,40 @@
-import express from 'express';
-import { permissionController } from '../controllers';
-import { authMiddleware } from '../middlewares';
+import express from "express";
+import { permissionController } from "../controllers/index.js";
+import { authMiddleware } from "../middlewares/index.js";
 
 const routerPermission = express.Router();
 
 // GET ALL
 routerPermission.get(
-  '/',
+  "/",
   authMiddleware.verifyToken,
   permissionController.getAll
 );
 
 // GET BY ID
 routerPermission.get(
-  '/:id',
+  "/:id",
   authMiddleware.verifyToken,
   permissionController.getById
 );
 
 // CREATE
 routerPermission.post(
-  '/',
+  "/",
   authMiddleware.verifyToken,
   permissionController.create
 );
 
 // UPDATE
 routerPermission.put(
-  '/:id',
+  "/:id",
   authMiddleware.verifyToken,
   permissionController.update
 );
 
 // DELETE
 routerPermission.delete(
-  '/:id',
+  "/:id",
   authMiddleware.verifyToken,
   permissionController.remove
 );

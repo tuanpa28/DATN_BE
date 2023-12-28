@@ -3,22 +3,22 @@ import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
-import { connectDB } from "./config/db";
-import router from "./router";
-
+import { connectDB } from "./config/db.js";
+import router from "./router/index.js";
 import swaggerJSDoc from "swagger-jsdoc";
 
 //config
 const app = express();
 dotenv.config();
+const port = process.env.PORT || 8080;
 
 // database config
 try {
-    (async () => {
-        await connectDB();
-    })();
+  (async () => {
+    await connectDB();
+  })();
 } catch (error) {
-    console.log("error connect db", error);
+  console.log("error connect db", error);
 }
 
 // middleware
@@ -28,31 +28,36 @@ app.use(morgan("tiny"));
 
 // api document
 const options = {
-    definition: {
-        openapi: "3.1.0",
-        info: {
-            title: "Document bóng đá soi cầu APIs",
-            version: "1.0",
-            description: "Here is the api documentation of the bóng đá soi cầu microservice project",
-        },
-        servers: [
-            {
-                url: "http://localhost:8080",
-            },
-        ],
-        components: {
-            securitySchemes: {
-                Bearer_Auth: {
-                    type: "http",
-                    bearerFormat: "Bearer",
-                    scheme: "Bearer",
-                    name: "Authorization",
-                    description: 'Enter JWT token in format "Bearer [token]"',
-                },
-            },
-        },
+  definition: {
+    openapi: "3.1.0",
+    info: {
+      title: "Document bóng đá soi cầu APIs",
+      version: "1.0",
+      description:
+        "Here is the api documentation of the bóng đá soi cầu microservice project",
     },
-    apis: ["./src/router/*.router.js", "./src/router/**/*.router.js", "./src/router/**/*.doc.yaml"],
+    servers: [
+      {
+        url: "http://localhost:8080",
+      },
+    ],
+    components: {
+      securitySchemes: {
+        Bearer_Auth: {
+          type: "http",
+          bearerFormat: "Bearer",
+          scheme: "Bearer",
+          name: "Authorization",
+          description: 'Enter JWT token in format "Bearer [token]"',
+        },
+      },
+    },
+  },
+  apis: [
+    "./src/router/*.router.js",
+    "./src/router/**/*.router.js",
+    "./src/router/**/*.doc.yaml",
+  ],
 };
 
 const openapiSpecification = swaggerJSDoc(options);
@@ -64,4 +69,6 @@ router(app);
 // database config
 connectDB();
 
-export const viteNodeApp = app;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

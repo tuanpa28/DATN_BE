@@ -1,9 +1,9 @@
-import { badRequest } from "../formatResponse/badRequest";
-import { serverError } from "../formatResponse/serverError";
-import { successfully } from "../formatResponse/successfully";
-import { transporter } from "../utils/sendEmail";
-import { emailService } from "../services";
-import { emailValidation } from "../validations";
+import { badRequest } from "../formatResponse/badRequest.js";
+import { serverError } from "../formatResponse/serverError.js";
+import { successfully } from "../formatResponse/successfully.js";
+import { transporter } from "../utils/sendEmail.js";
+import { emailService } from "../services/index.js";
+import { emailValidation } from "../validations/index.js";
 import "dotenv/config";
 
 export const getAll = async (req, res) => {

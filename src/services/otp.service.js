@@ -1,4 +1,4 @@
-import Otp from "../models/otp.model";
+import Otp from "../models/otp.model.js";
 
 export const getAll = async () => {
   return Otp.find();
