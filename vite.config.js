@@ -10,7 +10,7 @@ export default defineConfig({
     port: PORT,
   },
   plugins: [
-    VitePluginNode({
+    ...VitePluginNode({
       adapter: "express",
       appPath: "./src/app.js",
       exportName: "viteNodeApp",
