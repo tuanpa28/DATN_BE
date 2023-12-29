@@ -38,7 +38,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:8080",
+        url: "https://datn-be-zqom.onrender.com",
       },
     ],
     components: {
